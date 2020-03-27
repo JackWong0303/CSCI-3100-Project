@@ -17,32 +17,24 @@ app.use(express.static('website'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-<<<<<<< HEAD
-app.post('/CustomerSignUp' , (req, res) => {
-=======
-app.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname + './website/index.html'));
-});
 
 app.post('/customerSignUp' , (req, res) => {
->>>>>>> 76eb0098b47cb7569741cfc57a2cd1cf0c7ca626
+
   var data = req.body;
   const saltRounds = 10;
   bcrypt.hash(data.password, saltRounds).then(function (hash) {
     data.password = hash;
     client.connect(err => {
       const collection = client.db("PartyRoomBooking").collection("customer");
-<<<<<<< HEAD
       collection.insert(data);
       console.log("Customer Signup Success!!!");
       return res.redirect('/');
-=======
+
       collection.insertOne(data, (err) => {
         if (err) throw err;
         console.log("Customer Signup Success!!!");
         res.send("SignupSuccess");
       });
->>>>>>> 76eb0098b47cb7569741cfc57a2cd1cf0c7ca626
     });
   });
 });
@@ -79,24 +71,6 @@ app.use(express.json());
 
 router.get('/', function(req, res) {
   res.sendfile('index.html', {'root': "./website"});
-});
-
-router.get('/login', function(req, res) {
-  res.sendfile('login.html', {'root': "./website"});
-});
-
-app.post('/CustomerSignUp' , (req, res) => {
-  var data = req.body;
-  const saltRounds = 10;
-  bcrypt.hash(data.password, saltRounds).then(function (hash) {
-    data.password = hash;
-    client.connect(err => {
-      const collection = client.db("PartyRoomBooking").collection("customer");
-      collection.insert(data);
-      console.log("Customer Signup Success!!!");
-      return res.redirect('/');
-    });
-  });
 });
 
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopology: true});

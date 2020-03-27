@@ -15,19 +15,40 @@ $(function () {
   $("#createCustomerBtn").click(() => togglePages(2));
   $("#createOwnerBtn").click(() => togglePages(3));
 
-  $("#searchNowBtn").click(function () {
+  $("#searchNowBtn").click(function(){
     $("#mainSearchBar").slideDown("slow");
   });
 
-  $("#mainSearchBarCloseBtn").click(function () {
-     $("#mainSearchBar").slideUp("slow");;
+  $("#mainSearchBarCloseBtn").click(function(){
+    $("#mainSearchBar").slideUp("slow");;
   });
 
-
-  $("#searchBtn").click(function () {
-    $("html").animate({ scrollTop: $(searchResult).offset().top }, 1000);
+  //the login function
+  $("#loginBtn").click(function () {
+    //this is just a sample function.
+    //we will not check the login info using this simple approach.
+    var email = document.getElementById("CustomerLoginEmail").value;
+    var password = document.getElementById("CustomerLoginPassword").value;
+    switch (email) {
+      case "customer":
+        if (password == "123456")
+          window.location.href = "customer_info.html";
+        else
+          alert("ERROR: Incorrect password. Try again.");
+        break;
+      case "owner":
+        if (password == "qwerty")
+          window.location.href = "owner_info.html";
+        else
+          alert("ERROR: Incorrect password. Try again.");
+        break;
+      default:
+        alert("ERROR: The email is not registered. Try again.");
+        break;
+    }
+    return false;
   });
-  
+
   $("#Signup_CustomerSubmitBtn").click(() => {
     var username = document.getElementById("Signup_CustomerUsername").value;
     var email = document.getElementById("Signup_CustomerEmail").value;
@@ -46,84 +67,48 @@ $(function () {
       data: customer,
       url:"/CustomerSignUp"
     })
-    .done((res) => {
-      if (res == "SignupSuccess"){
-        togglePages(4);
-      }
-    })
-    .fail(function (jqXHR, textStatus, err) {
-      console.log(err);
-    });
+        .done((res) => {
+          if (res == "SignupSuccess"){
+            togglePages(4);
+          }
+        })
+        .fail(function (jqXHR, textStatus, err) {
+          console.log(err);
+        });
   });
 });
 
-function login(data) {
-  //this is just a sample function.
-  //we will not check the login info using this simple approach.
-  var username = data.username.value;
-  var password = data.password.value;
-  switch (username) {
-    case "customer":
-      if (password == "123456")
-        window.location.href = "customer_info.html";
-      else
-        alert("ERROR: Incorrect password. Try again.");
-      break;
-    case "owner":
-      if (password == "qwerty")
-        window.location.href = "owner_info.html";
-      else
-        alert("ERROR: Incorrect password. Try again.");
-      break;
-    default:
-      alert("ERROR: The email is not registered. Try again.");
-      break;
-  }
-  return false;
-}
+$(function(){
+  var range = document.getElementById("priceRange");
+  var output = document.getElementById("priceValue");
+  output.innerHTML = "Each price / hr: $" + (range.value*(20) + 20) + " below"; // Display the default slider value
 
-function customerSignUp(data) {
-  var username = data.username.value;
-  var email = data.email.value;
-  var password = data.password.value;
-  var phone = data.phone.value;
-  var customer = {
-    "username": username,
-    "email": email,
-    "password": password,
-    "phone": phone
+  // Update the current slider value (each time you drag the slider handle)
+  range.oninput = function() {
+    output.innerHTML = "Each price / hr: $" + (this.value*(20) + 20) + " below";
   }
-  console.log(customer);
-  $.ajax({
-    type: "POST",
-    async: false,
-    dataType: "json",
-    data: customer,
-    url: "/CustomerSignUp"
-  });
-}
+});
 
-function ownerSignUp(data) {
-  var name = data.name.value;
-  var username = data.username.value;
-  var partyRoomName = data.partyRoomName.value;
-  var email = data.email.value;
-  var password = data.password.value;
-  var phone = data.phone.value;
-  var owner = {
-    "name": name,
-    "username": username,
-    "partyRoomName": partyRoomName,
-    "email": email,
-    "password": password,
-    "phone": phone
-  }
-  console.log(owner);
-  $.ajax({
-    type: "POST",
-    async: false,
-    dataType: "json",
-    data: owner,
-    url: "/OwnerSignUp"
-  });
-}
+// $(function(){
+//   $("#Signup_CustomerSubmitBtn").click(() => {
+//     var username = document.getElementById("Signup_CustomerUsername").value;
+//     var email = document.getElementById("Signup_CustomerEmail").value;
+//     var password = document.getElementById("Signup_CustomerPassword").value;
+//     var phone = document.getElementById("Signup_CustomerPhone").value;
+//     var customer = {
+//       "username": username,
+//       "email": email,
+//       "password": password,
+//       "phone": phone
+//     }
+//     console.log(customer);
+//     $.ajax({
+//       type: "POST",
+//       async: false,
+//       dataType: "json",
+//       data: customer,
+//       url:"/CustomerSignUp"
+//     })
+//     .done(() => togglePages(1));
+//   });
+// });
