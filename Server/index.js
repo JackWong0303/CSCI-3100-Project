@@ -2,35 +2,20 @@ const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const bcrypt = require('bcrypt');
 const app = express();
+const router = express.Router();
 
 app.use(express.static('website'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-app.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname + './website/index.html'));
-});
-
-app.post('/CustomerSignUp' , (req, res) => {
-  var data = req.body;
-  const saltRounds = 10;
-  bcrypt.hash(data.password, saltRounds).then(function (hash) {
-    data.password = hash;
-    client.connect(err => {
-      const collection = client.db("PartyRoomBooking").collection("customer");
-      collection.insertOne(data, (err) => {
-        if (err) throw err;
-        console.log("Customer Signup Success!!!");
-        res.send("SignupSuccess");
-      });
-    });
-  });
-});
 
 // app.get('/', (req,res) => {
 //   res.sendFile(path.join(__dirname + 'hello-react-app/public/index.html'));
@@ -58,6 +43,42 @@ app.post('/CustomerSignUp' , (req, res) => {
 //     });
 //   });
 // });
+
+app.use(cors());
+app.use(express.json());
+
+router.get('/', function(req, res) {
+  res.sendfile('index.html', {'root': "./website"});
+});
+
+router.get('/login', function(req, res) {
+  res.sendfile('login.html', {'root': "./website"});
+});
+
+app.post('/CustomerSignUp' , (req, res) => {
+  var data = req.body;
+  const saltRounds = 10;
+  bcrypt.hash(data.password, saltRounds).then(function (hash) {
+    data.password = hash;
+    client.connect(err => {
+      const collection = client.db("PartyRoomBooking").collection("customer");
+      collection.insert(data);
+      console.log("Customer Signup Success!!!");
+      return res.redirect('/');
+    });
+  });
+});
+
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopology: true});
+const connection = mongoose.connection;
+
+connection.once('open', () => {
+  console.log('MongoDB connection established');
+});
+const owner_route = require('./routes/owner');
+
+app.use('/owners', owner_route);
+app.use('/', router);
 
 app.listen(3000, () => {
   console.log("server is listening on port 3000");
