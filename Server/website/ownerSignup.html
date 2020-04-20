@@ -81,10 +81,10 @@
     <div class="container " style="padding-top: 100px">
       <h1>Add Party Room</h1>
     	<hr>
-    	<form>
+    	<form method = "post" action="/create_partyroom/create">
     	  <div class="form-group">
     	    <label for="party_room_name">Party Room Name</label>
-    	    <input name="partyRoomName" type="text" class="form-control" id="partyroomname" placeholder="Enter name of party room">
+    	    <input name="party_room_name" type="text" class="form-control" id="partyroomname" placeholder="Enter name of party room">
         </div>
 
         <div class="form-group">
@@ -138,7 +138,7 @@
 
         <div class="form-group">
           <label for"party_room_info">Description of your party room</label><br>
-          <textarea class="form-control" name="partyRoomDescr" rows="6" cols="40"></textarea>
+          <textarea class="form-control" name="description" rows="6" cols="40"></textarea>
           <small id="createHelp1" class="form-text text-muted">Describe your party room (e.g. features, characteristics)
             <br>Input limit: 200 characters.</small>
         </div>
@@ -172,7 +172,7 @@
             </div>
           </div>
         </div>
-        <button type="button" id="addPriceSettingBtn" class="btn btn-info">Add price setting</button>
+        <button type="button" id="addPriceSettingBt" class="btn btn-info">Add price setting</button>
 
         <br>
         <br>

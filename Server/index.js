@@ -96,6 +96,9 @@ app.use('/customer', customer_info);
 const owner_info = require('./routes/owner_info');
 app.use('/owner', owner_info);
 
+const createPartyRoom = require('./routes/create_partyroom');
+app.use('/create_partyroom', createPartyRoom);
+
 // const owner_route = require('./routes/owner');
 //
 // app.use('/owners', owner_route);

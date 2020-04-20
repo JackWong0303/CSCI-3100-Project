@@ -1,4 +1,39 @@
 <!DOCTYPE html>
+<script>
+	function appendRow()
+	{
+		document.getElementById('demo').innerHTML+='<br/>\n' +
+				'\t\t<div id="priceSetting">\n' +
+				'\t\t\t<div class="priceSettingBlock">\n' +
+				'\t\t\t\t<p class="priceSettingTitle">Price Setting:</p>\n' +
+				'\t\t\t\t<div class="form-row priceSettingDetail">\n' +
+				'\t\t\t\t\t<div class="form-group col-md-3">\n' +
+				'\t\t\t\t\t\t<label>Day: </label>\n' +
+				'\t\t\t\t\t\t<select name="priceDay[]" class="form-control">\n' +
+				'\t\t\t\t\t\t\t<option value="Mondays to Thursdays">Mondays to Thursdays</option>\n' +
+				'\t\t\t\t\t\t\t<option value="Fridays">Fridays</option>\n' +
+				'\t\t\t\t\t\t\t<option value="Saturdays">Saturdays</option>\n' +
+				'\t\t\t\t\t\t\t<option value="Sunday">Sunday</option>\n' +
+				'\t\t\t\t\t\t</select>\n' +
+				'\t\t\t\t\t</div>\n' +
+				'\t\t\t\t\t<div class="form-group col-auto">\n' +
+				'\t\t\t\t\t\t<label>Time: </label>\n' +
+				'\t\t\t\t\t\t<div class="form-inline">\n' +
+				'\t\t\t\t\t\t\t<input name="priceStartTime[]" type="time" class="form-control" value="00:00:00">\n' +
+				'\t\t\t\t\t\t\t<label>&emsp;to&emsp;</label>\n' +
+				'\t\t\t\t\t\t\t<input name="priceEndTime[]" type="time" class="form-control" value="00:00:00">\n' +
+				'\t\t\t\t\t\t</div>\n' +
+				'\t\t\t\t\t</div>\n' +
+				'\t\t\t\t\t<div class="form-group col-md-3">\n' +
+				'\t\t\t\t\t\t<label>Price: </label>\n' +
+				'\t\t\t\t\t\t<input name="price[]" type="text" class="form-control">\n' +
+				'\t\t\t\t\t</div>\n' +
+				'\t\t\t\t</div>\n' +
+				'\t\t\t</div>\n' +
+				'\t\t</div><br/>';
+	}
+</script>
+
 <html lang="en">
   <head>
     <title>Let Party - Party Room Owner - Add Party Room </title>
@@ -30,115 +65,210 @@
 <div class="container ">
   <h1>Party Room Owner - Add Party Room </h1>
 	<hr>
-	<form>
-	  <div class="form-group">
-	    <label for="party_room_name">Party Room name</label>
-	    <input type="text" class="form-control" id="partyroomname" placeholder="Enter name of party room"></div>
-    <div class="form-group">
-	    <label for="room_name">Room name</label>
-	    <input type="text" class="form-control" id="roomname" placeholder="Enter name of room"></div>
-    <div class="form-group">
-	    <label for="address">Address</label>
-	    <input type="text" class="form-control" id="address" placeholder="Enter address"></div>
-	    <div class="form-group col-lg-3">
-		   <label for="district">District:</label>
-		    		<select id="district1">
-					<option value="">Hong Kong Island:</option>
-					<option value="cenwest">Central & Western District</option>
-					<option value="wanchai">Wanchai District</option>
-					<option value="eastern">Eastern District</option>
-					<option value="southern">Southern DIstrict</option>
-  					<option value="">Kowloon: </option>
-					<option value="shamshuipo">Shamshuipo District</option>
-					<option value="yautsimmong">Yau Tsim Mong District</option>
-					<option value="kowlooncity">Kowloon City District</option>
-					<option value="wongtaisin">Wong Tai Sin District</option>
-					<option value="kwuntong">Kwun Tong District</option>
-  					<option value="">New Territories:</option>
-  					<option value="kwaitsing">Kwai Tsing District</option>
-					<option value="tsuenwan">Tsuen Wan District</option>
-					<option value="tuenmun">Tuen Mun District</option>
-					<option value="yuenlong">Yuen Long District</option>
-  					<option value="north">North District</option>
-					<option value="taipo">Tai Po</option>
-					<option value="shatin">Sha Tin District</option>
-					<option value="saikung">Sai Kung District</option>
-					<option value="islands">Islands District</option>
-				</select></div>
-    <div class="form-group">
-      <label for"party_room_info">Description of your party room</label><br>
-      <textarea name="partyRoomInfo1" rows="6" cols="40"></textarea>
-      <small id="createHelp1" class="form-text text-muted">Describe your party room (e.g. features, characteristics)
-      <br>Input limit: 200 characters.</small> </div>
-    <div class="form-group">
-      <label for"party_room_price">Price and offers</label><br>
-      <textarea name="partyRoomInfo1" rows="6" cols="40"></textarea></div>
-    
-    <h4>Operating Hours </h4>
-    <br>
-	Mondays to Thursdays:
-	<div class="row">
-    		<div class="form-group col-lg-3">
-				<label for="starttime_wd">From</label>
-				<input type="time"></div>
-    		<div class="form-group col-lg-3">
-				<label for="endtime_wd"> to </label>
-				<input type="time"></div></div>
-	Fridays:
-	<div class="row">
-    		<div class="form-group col-lg-3">
-			<label for="starttime_fri">From</label>
-			<input type="time"></div>
-    		<div class="form-group col-lg-3">
-			<label for="endtime_fri"> to </label>
-			<input type="time"></div>
-	</div>
-	Saturdays:
-	<div class="row">
-   		<div class="form-group col-lg-3">
-			<label for="starttime_sat">From</label>
-			<input type="time"></div>
-    		<div class="form-group col-lg-3">
-			<label for="endtime_sat"> to </label>
-			<input type="time"></div></div>
-	Sundays:
-    	<div class="row">
-		<div class="form-group col-lg-3">
-			<label for="starttime_sun">From</label>
-			<input type="time"></div>
-   		<div class="form-group col-lg-3">
-			<label for="endtime_sun"> to </label>
-		 	<input type="time"></div></div>
-	Public Holidays:
-	<div class="row">
-    		<div class="form-group col-lg-3">
-			<label for="starttime_ph">From</label>
-			<input type="time"></div>
-   	 	<div class="form-group col-lg-3">
-			<label for="endtime_ph"> to </label>
-		 	<input type="time"></div></div>
-    <h4>Available facilities </h4>
-    
-	<label>
-	<input type="checkbox" name="facilities" value="ps4" id="facilities_0">
-	PS4</label><br>
-	<label>
-	<input type="checkbox" name="facilities" value="switch" id="facilities_1">
-	Switch</label><br>
-	<label>
-	<input type="checkbox" name="facilities" value="mahjong" id="facilities_2">
-	Mahjong</label><br>
-        <label>
-	<input type="checkbox" name="facilities" value="VR" id="facilities_3">
-	VR</label><br>
-        <label>
-	<input type="checkbox" name="facilities" value="barbecue" id="facilities_4">
-	Barbecue</label><br>
-        <label>
-	<input type="checkbox" name="facilities" value="free drinks" id="facilities_5">
-	Free drinks</label>
-	<br>
-	  
+	<form method = "post" action="/create_partyroom/create">
+		<div class="form-group">
+			<label for="party_room_name">Party Room Name</label>
+			<input name="party_room_name" type="text" class="form-control" id="partyroomname" placeholder="Enter name of party room">
+		</div>
+
+		<div class="form-group">
+			<label for="party_room_phone">Party Room Phone Number</label>
+			<input name="partyRoomPhoneNum" type="text" class="form-control" placeholder="Enter phone number">
+		</div>
+		<!-- <div class="form-group">
+            <label for="room_name">Room name</label>
+            <input type="text" class="form-control" id="roomname" placeholder="Enter name of room">
+        </div> -->
+
+		<div class="form-group">
+			<label for="address">Address 1</label>
+			<input name="address1" type="text" class="form-control" id="inputAddress1" placeholder="Main Street">
+		</div>
+
+		<div class="form-group">
+			<label for="inputAddress2">Address 2</label>
+			<input name="address2" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+		</div>
+
+		<div class="form-group">
+			<label for="district">District:</label>
+			<select name="district" id="district1" class="form-control">
+				<option value="" ></option>
+				<option value="" disabled>Hong Kong Island:</option>
+				<option value="cenwest">Central & Western District</option>
+				<option value="wanchai">Wanchai District</option>
+				<option value="eastern">Eastern District</option>
+				<option value="southern">Southern DIstrict</option>
+
+				<option value="" disabled>Kowloon: </option>
+				<option value="shamshuipo">Shamshuipo District</option>
+				<option value="yautsimmong">Yau Tsim Mong District</option>
+				<option value="kowlooncity">Kowloon City District</option>
+				<option value="wongtaisin">Wong Tai Sin District</option>
+				<option value="kwuntong">Kwun Tong District</option>
+
+				<option value="" disabled>New Territories:</option>
+				<option value="kwaitsing">Kwai Tsing District</option>
+				<option value="tsuenwan">Tsuen Wan District</option>
+				<option value="tuenmun">Tuen Mun District</option>
+				<option value="yuenlong">Yuen Long District</option>
+				<option value="north">North District</option>
+				<option value="taipo">Tai Po</option>
+				<option value="shatin">Sha Tin District</option>
+				<option value="saikung">Sai Kung District</option>
+				<option value="islands">Islands District</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for"party_room_info">Description of your party room</label><br>
+			<textarea class="form-control" name="description" rows="6" cols="40"></textarea>
+			<small id="createHelp1" class="form-text text-muted">Describe your party room (e.g. features, characteristics)
+				<br>Input limit: 200 characters.</small>
+		</div>
+
+		<h4>Price</h4>
+		<div id="priceSetting">
+			<div class="priceSettingBlock">
+				<p class="priceSettingTitle">Price Setting:</p>
+				<div class="form-row priceSettingDetail">
+					<div class="form-group col-md-3">
+						<label>Day: </label>
+						<select name="priceDay[]" class="form-control">
+							<option value="Mondays to Thursdays">Mondays to Thursdays</option>
+							<option value="Fridays">Fridays</option>
+							<option value="Saturdays">Saturdays</option>
+							<option value="Sunday">Sunday</option>
+						</select>
+					</div>
+					<div class="form-group col-auto">
+						<label>Time: </label>
+						<div class="form-inline">
+							<input name="priceStartTime[]" type="time" class="form-control" value="00:00:00">
+							<label>&emsp;to&emsp;</label>
+							<input name="priceEndTime[]" type="time" class="form-control" value="00:00:00">
+						</div>
+					</div>
+					<div class="form-group col-md-3">
+						<label>Price: </label>
+						<input name="price[]" type="text" class="form-control">
+					</div>
+				</div>
+			</div>
+		</div>
+		<p id="demo"></p>
+		<button type="button" onClick="appendRow()" class="btn btn-info">Add price setting</button>
+
+
+
+		<br>
+		<br>
+		<h4>Operating Hours </h4>
+		<div>
+			Mondays to Thursdays:
+			<div class="form-inline">
+				<div>
+					<input name="WeekdaysOpenTime" type="time" class="form-control" value="00:00:00">
+				</div>
+				<div>&emsp;</div>
+				<label>to&emsp;</label>
+				<div>
+					<input name="WeekdaysCloseTime" type="time" class="form-control" value="00:00:00">
+				</div>
+			</div>
+		</div>
+
+		<div>
+			Fridays:
+			<div class="form-inline">
+				<div>
+					<input name="FriOpenTime" type="time" class="form-control" value="00:00:00">
+				</div>
+				<div>&emsp;</div>
+				<label>to&emsp;</label>
+				<div>
+					<input name="FriCloseTime" type="time" class="form-control" value="00:00:00">
+				</div>
+			</div>
+		</div>
+
+		<div>
+			Saturdays:
+			<div class="form-inline">
+				<div>
+					<input name="SatOpenTime" type="time" class="form-control" value="00:00:00">
+				</div>
+				<div>&emsp;</div>
+				<label>to&emsp;</label>
+				<div>
+					<input name="SatCloseTime" type="time" class="form-control" value="00:00:00">
+				</div>
+			</div>
+		</div>
+
+		<div>
+			Sunday:
+			<div class="form-inline">
+				<div>
+					<input name="SunOpenTime" type="time" class="form-control" value="00:00:00">
+				</div>
+				<div>&emsp;</div>
+				<label>to&emsp;</label>
+				<div>
+					<input name="SunCloseTime" type="time" class="form-control" value="00:00:00">
+				</div>
+			</div>
+		</div>
+
+		<div>
+			Public Holidays:
+			<div class="form-inline">
+				<div>
+					<input name="HolidaysOpenTime" type="time" class="form-control" value="00:00:00">
+				</div>
+				<div>&emsp;</div>
+				<label>to&emsp;</label>
+				<div>
+					<input name="HolidaysCloseTime" type="time" class="form-control" value="00:00:00">
+				</div>
+			</div>
+		</div>
+
+		<br>
+		<h4>Facilities:</h4>
+		<!-- <h4>Available facilities </h4> -->
+		<div class="row px-3">
+			<div class="form-group mt-2">
+				<div>
+					<div class="form-check form-check-inline">
+						<input name="facilities" class="form-check-input" type="checkbox" id="facCheckbox1" value="PS4">
+						<label class="form-check-label" for="facCheckbox1">PS4</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input name="facilities" class="form-check-input" type="checkbox" id="facCheckbox2" value="Switch">
+						<label class="form-check-label" for="facCheckbox2">Switch</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input name="facilities" class="form-check-input" type="checkbox" id="facCheckbox3" value="Mahjong">
+						<label class="form-check-label" for="facCheckbox3">Mahjong</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input name="facilities" class="form-check-input" type="checkbox" id="facCheckbox4" value="VR">
+						<label class="form-check-label" for="facCheckbox4">VR</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input name="facilities" class="form-check-input" type="checkbox" id="facCheckbox5" value="Barbecue">
+						<label class="form-check-label" for="facCheckbox5">Barbecue</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input name="facilities" class="form-check-input" type="checkbox" id="facCheckbox6" value="Free drinks">
+						<label class="form-check-label" for="facCheckbox6">Free drinks</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<p>You may add more party room later.</p>
 	  <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
