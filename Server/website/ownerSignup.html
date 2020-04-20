@@ -1,6 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<script>
+  function appendRow()
+  {
+    document.getElementById('demo').innerHTML+='<br/>\n' +
+            '\t\t<div id="priceSetting">\n' +
+            '\t\t\t<div class="priceSettingBlock">\n' +
+            '\t\t\t\t<p class="priceSettingTitle">Price Setting:</p>\n' +
+            '\t\t\t\t<div class="form-row priceSettingDetail">\n' +
+            '\t\t\t\t\t<div class="form-group col-md-3">\n' +
+            '\t\t\t\t\t\t<label>Day: </label>\n' +
+            '\t\t\t\t\t\t<select name="priceDay[]" class="form-control">\n' +
+            '\t\t\t\t\t\t\t<option value="Mondays to Thursdays">Mondays to Thursdays</option>\n' +
+            '\t\t\t\t\t\t\t<option value="Fridays">Fridays</option>\n' +
+            '\t\t\t\t\t\t\t<option value="Saturdays">Saturdays</option>\n' +
+            '\t\t\t\t\t\t\t<option value="Sunday">Sunday</option>\n' +
+            '\t\t\t\t\t\t</select>\n' +
+            '\t\t\t\t\t</div>\n' +
+            '\t\t\t\t\t<div class="form-group col-auto">\n' +
+            '\t\t\t\t\t\t<label>Time: </label>\n' +
+            '\t\t\t\t\t\t<div class="form-inline">\n' +
+            '\t\t\t\t\t\t\t<input name="priceStartTime[]" type="time" class="form-control" value="00:00:00">\n' +
+            '\t\t\t\t\t\t\t<label>&emsp;to&emsp;</label>\n' +
+            '\t\t\t\t\t\t\t<input name="priceEndTime[]" type="time" class="form-control" value="00:00:00">\n' +
+            '\t\t\t\t\t\t</div>\n' +
+            '\t\t\t\t\t</div>\n' +
+            '\t\t\t\t\t<div class="form-group col-md-3">\n' +
+            '\t\t\t\t\t\t<label>Price: </label>\n' +
+            '\t\t\t\t\t\t<input name="price[]" type="text" class="form-control">\n' +
+            '\t\t\t\t\t</div>\n' +
+            '\t\t\t\t</div>\n' +
+            '\t\t\t</div>\n' +
+            '\t\t</div>';
+  }
+</script>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -143,6 +176,16 @@
             <br>Input limit: 200 characters.</small>
         </div>
 
+        <h4>Pary Room Photo <span style="font-weight: bold">(Three only)</span></h4>
+        <div class="input-group">
+          <div class="custom-file">
+            <input type="file" accept="image/*">
+            <input type="file" accept="image/*">
+            <input type="file" accept="image/*">
+          </div>
+        </div>
+
+        <br>
         <h4>Price</h4>
         <div id="priceSetting">
           <div class="priceSettingBlock">
@@ -172,7 +215,8 @@
             </div>
           </div>
         </div>
-        <button type="button" id="addPriceSettingBt" class="btn btn-info">Add price setting</button>
+          <p id="demo"></p>
+          <button type="button" onClick="appendRow()" class="btn btn-info">Add price setting</button>
 
         <br>
         <br>
@@ -283,6 +327,20 @@
         <br>
         <p>You may add more party room later.</p>
     	  <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <form id="#testForm" class="mt-4" action="/ownerSignup/uploadPhoto" method="POST" enctype="multipart/form-data">
+        <h4>Pary Room Photo <span style="font-weight: bold">(Three only)</span></h4>
+        <div class="input-group">
+          <div class="custom-file">
+            <input type="file" name="file" accept="image/*">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <form id="#testForm2" class="mt-4" action="/ownerSignup/downloadPhoto" method="POST" enctype="multipart/form-data">
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
   </section>
 

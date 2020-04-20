@@ -5,24 +5,24 @@ $(function () {
     async: false,
     url: "/checkLogin"
   })
-  .done(res => {
-    if(res.isLogined == true){
-      $('#loginSignupForm').hide();
-      $('#userIcon').show();
-      $('#userIcon').append(res.user.toUpperCase().charAt(0));
-      $('#userName').append(res.user);
-      if(res.userType == 'owner'){
-        $('#userIcon').css('background-color', '#eb4934');
-        userType = 'owner';
+    .done(res => {
+      if (res.isLogined == true) {
+        $('#loginSignupForm').hide();
+        $('#userIcon').show();
+        $('#userIcon').append(res.user.toUpperCase().charAt(0));
+        $('#userName').append(res.user);
+        if (res.userType == 'owner') {
+          $('#userIcon').css('background-color', '#eb4934');
+          userType = 'owner';
+        }
+        else {
+          userType = 'customer';
+        }
       }
-      else{
-        userType = 'customer';
-      }
-    }
-  })
-  .fail((jqXHR, textStatus, err) => {
-    alert(err);
-  });
+    })
+    .fail((jqXHR, textStatus, err) => {
+      alert(err);
+    });
 
   $('#userIcon').click(() => {
     $("#sideBar").animate({
@@ -30,8 +30,26 @@ $(function () {
     });
   });
 
+  $('#favourite').click(() => {
+    if (userType == 'customer') {
+      window.location.href = "/customer";
+    }
+    else if (userType == 'owner') {
+      window.location.href = "/owner";
+    }
+  });
+
   $('#bookingRecordBtn').click(() => {
-    if(userType == 'customer') {
+    if (userType == 'customer') {
+      window.location.href = "/customer";
+    }
+    else if (userType == 'owner') {
+      window.location.href = "/owner";
+    }
+  });
+
+  $('#personalInfo').click(() => {
+    if (userType == 'customer') {
       window.location.href = "/customer";
     }
     else if (userType == 'owner') {
@@ -39,7 +57,6 @@ $(function () {
     }
   });
 });
-
 
 // Logout
 $(function () {
@@ -49,21 +66,14 @@ $(function () {
       async: false,
       url: "/logout"
     })
-    .done(res => {
-      window.location.href = "/";
-    })
-    .fail((jqXHR, textStatus, err) => {
-      alert(err);
-    });
+      .done(res => {
+        window.location.href = "/";
+      })
+      .fail((jqXHR, textStatus, err) => {
+        alert(err);
+      });
   });
 });
-
-// $(function () {
-//   $('#bookingRecordBtn').click(() => {
-//     window.location.href = "/customer";
-//   });
-// });
-
 
 $(function () {
   $("#searchNowBtn").click(() => $("#mainSearchBar").slideDown("slow"));
@@ -82,10 +92,24 @@ $(function () {
       url: url
     })
       .done(res => {
-        alert(res);
-        if (res == "SearchSuccess") {
-
+        alert("Search Success!");
+        if (res.hasResult) {
+          $("#searchResult").html("");
           $("html").animate({ scrollTop: $("#scrollTo").offset().top }, 600);
+          res.result.forEach(room => {
+            $("#searchResult").append(createCard(
+              room.img,
+              room.title,
+              room.description,
+              room.capacity,
+              room.location,
+              room.price
+            ));
+          });
+        }
+        else {
+          $("#searchResult").html(
+            "<img class='card-img-top' src='images/no-result.webp' alt='Card image cap' width='800px' height='600px'>");
         }
       })
       .fail((jqXHR, textStatus, err) => {
@@ -93,16 +117,6 @@ $(function () {
       });
     e.preventDefault();
   });
-
-  $("#addCard").click(() => {
-    $("#searchResult").append(createCard("images/card-img.png",
-      "Party Room No.1",
-      "This is a longer card with supporting text below as a natural lead-in to additional content." +
-      "This content is a little bit longer.",
-      20, "CUHK", "FREE"
-    ));
-  });
-
 });
 
 function createCard(img, title, description, capacity, location, price) {

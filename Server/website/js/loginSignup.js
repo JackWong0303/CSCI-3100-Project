@@ -4,14 +4,14 @@ $(function () {
     async: false,
     url: "/checkLogin"
   })
-  .done(res => {
-    if(res.isLogined == true){
-      window.location.href = "/";
-    }
-  })
-  .fail((jqXHR, textStatus, err) => {
-    alert(err);
-  });
+    .done(res => {
+      if (res.isLogined == true) {
+        window.location.href = "/";
+      }
+    })
+    .fail((jqXHR, textStatus, err) => {
+      alert(err);
+    });
 });
 
 $(function () {
@@ -26,9 +26,7 @@ $(function () {
     })
       .done(res => {
         alert(res);
-        if (res =="CustomerLoginSuccess")
-          window.location.href = "/";
-        else if (res =="OwnerLoginSuccess")
+        if (res == "CustomerLoginSuccess" || res == "OwnerLoginSuccess")
           window.location.href = "/";
       })
       .fail((jqXHR, textStatus, err) => {
@@ -39,13 +37,11 @@ $(function () {
 });
 
 $(function () {
-  $("#createCustomerBtn").click(() =>{
+  $("#createCustomerBtn").click(() => {
     window.location.href = "/customerSignup";
   });
-});
 
-$(function () {
-  $("#createOwnerBtn").click(() =>{
+  $("#createOwnerBtn").click(() => {
     window.location.href = "/ownerSignup";
   });
 });

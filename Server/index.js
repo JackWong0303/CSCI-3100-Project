@@ -15,23 +15,21 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 var path = require('path');
 
-// app.use(express.static('website'));
-// app.use(express.static('website/js'));
-// app.use('/website',express.static('images'));
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(cors());
 app.use(express.json());
 
+// For Login
 app.use(session({
   secret: 'csci3100',
-  store: new MongoStore({url: 'mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/sessiondb?retryWrites=true&w=majority'}),
+  store: new MongoStore({ url: 'mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/sessiondb?retryWrites=true&w=majority' }),
   cookie: { maxAge: 60 * 10000 },
   saveUninitialized: false,
   resave: false
 }));
+
 
 // Check MongoDB Connection
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
@@ -51,21 +49,21 @@ app.post('/checkLogin', (req, res) => {
   var user = '';
   var isLogined = false;
   var userType = 'guest';
-  if (!(req.session.user == undefined)){
+  if (!(req.session.user == undefined)) {
     user = req.session.user;
     isLogined = true;
     userType = req.session.userType
   }
-  res.send({user: user, isLogined: isLogined, userType: userType});
+  res.send({ user: user, isLogined: isLogined, userType: userType });
 });
 
 app.post('/logout', (req, res) => {
-    req.session.destroy(function(err) {
-        if(err){
-            res.send("Logout Fail");
-        }
-        res.redirect('/');
-    });
+  req.session.destroy(function (err) {
+    if (err) {
+      res.send("Logout Fail");
+    }
+    res.redirect('/');
+  });
 });
 
 
@@ -74,7 +72,23 @@ app.get('/search', (req, res) => {
   console.log(data);
   client.connect(err => {
     console.log("Search Success!!!");
-    res.send("SearchSuccess");
+    //test results
+    var count = Math.floor(Math.random() * 13);
+    var result = [];
+    for (let i = 0; i < count; i++)
+      result.push({
+        img: "images/card-img.png",
+        title: "Party Room No." + (i + 1),
+        description: "This is a longer card with supporting text below as a natural lead-in to additional content." +
+          "This content is a little bit longer.",
+        capacity: Math.floor(Math.random() * 25) + 6,
+        location: "CUHK",
+        price: "FREE"
+      });
+    console.log(count);
+    res.send({
+      hasResult: count, result: result
+    });
   });
 });
 

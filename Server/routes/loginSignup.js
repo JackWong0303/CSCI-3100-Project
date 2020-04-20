@@ -17,19 +17,19 @@ router.post('/login', (req, res) => {
   var data = req.body;
   console.log(req.body);
   client.connect(err => {
-    if (data.userType == "customer"){
+    if (data.userType == "customer") {
       const cusColl = client.db("PartyRoomBooking").collection("customer");
-      cusColl.findOne({username:  data.username},  {password: 1}, (err, customer) => {
+      cusColl.findOne({ username: data.username }, { password: 1 }, (err, customer) => {
         // Check whether the username exist
-        if (customer == null){
+        if (customer == null) {
           res.send("Username Not Found");
         }
         else {
           // Check whether the password correct
           bcrypt.compare(data.password, customer.password, (err, result) => {
-            if(result == true) {
-              req.session.regenerate(function(err) {
-                if(err){
+            if (result == true) {
+              req.session.regenerate(function (err) {
+                if (err) {
                   res.send("Login Fail");
                 }
                 req.session.user = data.username;
@@ -44,19 +44,19 @@ router.post('/login', (req, res) => {
         }
       });
     }
-    else if (data.userType == "owner"){
+    else if (data.userType == "owner") {
       const ownerColl = client.db("PartyRoomBooking").collection("owner");
-      ownerColl.findOne({username:  data.username},  {password: 1}, (err, owner) => {
+      ownerColl.findOne({ username: data.username }, { password: 1 }, (err, owner) => {
         // Check whether the username exist
-        if (owner == null){
+        if (owner == null) {
           res.send("Username Not Found");
         }
         else {
           // Check whether the password correct
           bcrypt.compare(data.password, owner.password, (err, result) => {
-            if(result == true) {
-              req.session.regenerate(function(err) {
-                if(err){
+            if (result == true) {
+              req.session.regenerate(function (err) {
+                if (err) {
                   res.send("Login Fail");
                 }
                 req.session.user = data.username;
